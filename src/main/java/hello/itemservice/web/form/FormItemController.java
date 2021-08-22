@@ -44,7 +44,7 @@ public class FormItemController {
         log.info("item.open={}", item.getOpen());       // spring에서는 'on'을 'true'로 인식한다, 체크박스를 선택 안하면 아예 open값이 넘어오지도 않는다
                                                         // 체크박스에 해당하는 객체(= open)가 null로 넘어올 때 문제가 되는 경우, 서버가 해당 값을 인식안하고 넘어가버리는 경우도 있다
                                                         // 문제 해결 방법: 히든 태그를 이용 -> 체크가 안되어있으면, _open = on 으로 전송, 그러면 open = false로 spring은 인식
-                                                        // 타임 리프에서는 다른 방식으로 해결가크
+                                                        // 타임 리프에서는 다른 방식으로 해결가능
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
