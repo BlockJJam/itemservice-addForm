@@ -2,6 +2,7 @@ package hello.itemservice.web.form;
 
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
+import hello.itemservice.domain.item.ItemType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,12 @@ public class FormItemController {
         return regions;
     }
 
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes(){
+        return ItemType.values();
+    }
+
+
     @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
@@ -64,6 +71,7 @@ public class FormItemController {
                                                         // 문제 해결 방법: 히든 태그를 이용 -> 체크가 안되어있으면, _open = on 으로 전송, 그러면 open = false로 spring은 인식
                                                         // 타임 리프에서는 다른 방식으로 해결가능
         log.info("item.regions={}", item.getRegions());
+        log.info("item.itemType={}", item.getItemType());
 
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
